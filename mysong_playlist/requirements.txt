@@ -1,0 +1,10 @@
+apache-airflow==2.7.2
+flask-appbuilder==4.3.6
+pandas==1.5.3  # Versi ini kompatibel dengan Python 3.11 dan SQLAlchemy < 2.0
+sqlalchemy==1.4.49  # Versi ini kompatibel dengan Airflow dan Flask-AppBuilder
+requests==2.31.0
+python-dotenv==1.0.0
+numpy==1.24.4  # Versi ini kompatibel dengan Python 3.11
+# pendulum==2.1.2
+# Flask-Session==0.4.0  # Untuk mengatasi masalah "No module named 'flask_session.sessions'"
+# connexion[flask]>=2.10.0

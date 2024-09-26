@@ -1,0 +1,24 @@
+project:
+  name: etl-3-spotify  # Nama proyek Anda
+
+webserver:
+  port: 8083  # Port yang digunakan untuk UI Airflow, bisa disesuaikan jika 8083 sudah digunakan
+airflow:
+  home: C:/Users/USER/Alta-DE/DE-Projects/ETL-2-Spotify/airflow
+
+database:
+  type: sqlite  # Menggunakan SQLite sebagai database
+  path: /usr/local/airflow/airflow.db  # Path ke file SQLite (bisa disesuaikan dengan path lokal Anda)
+  # path: C:/Users/USER/Alta-DE/DE-Projects/ETL-2-Spotify/airflow/include/my_played_tracks.sqlite
+
+env:
+  - AIRFLOW__CORE__LOAD_EXAMPLES=False  # Menonaktifkan DAG contoh bawaan Airflow
+  # - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////C:/Users/USER/Alta-DE/DE-Projects/ETL-2-Spotify/airflow/airflow.db # Koneksi SQLite untuk Airflow
+  - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////usr/local/airflow/airflow.db  # Gunakan path yang benar dalam container
+  - AIRFLOW__WEBSERVER__WEB_SERVER_HOST=0.0.0.0  # Mengatur host UI webserver agar dapat diakses
+  - AIRFLOW__WEBSERVER__PORT=8083  # Port yang digunakan untuk UI Airflow
+
+# Jika menggunakan scheduler
+scheduler:
+  run:
+    interval: 30  # Interval waktu scheduler (detik), bisa disesuaikan dengan kebutuhan
