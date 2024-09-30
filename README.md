@@ -3,14 +3,6 @@
 ## Project Overview
 This project demonstrates an ETL (Extract, Transform, Load) pipeline that retrieves data from the Spotify API and stores it in an SQLite database. The pipeline tracks and analyzes your Spotify listening history, including song titles, artist names, timestamps, and play counts. The project is managed using Astro, a platform for orchestrating workflows with Apache Airflow, which simplifies the scheduling and execution of the ETL pipeline.
 
-## Project Structure
-* `main.py`: Initializes the environment configuration and loads the required environment variables from a .env file. It also sets up the connection to the Spotify API and ensures that the authentication tokens are refreshed when needed.
-* `app.py`: Contains the main configuration for the Spotify API, ensuring that the API tokens and user information are set up correctly. It verifies that all required environment variables are loaded properly.
-* `spotify_etl.py`: Contains the core logic for the ETL process, including extracting data from the Spotify API, transforming it to ensure its integrity, and loading it into an SQLite database.
-* `spotify_dag.py`: Defines the DAG (Directed Acyclic Graph) for Airflow, which automates the scheduling of the ETL process using Astro.
-* `requirements.txt`: Lists the dependencies required to run this project.
-* `.env`: Stores environment variables such as Spotify API credentials and database configurations.
-
 ## Getting Started
 ### Clone This Repository
 ```
@@ -130,4 +122,59 @@ astro dev start
 
 ### Running the ETL Pipeline
 Once Airflow is running, the ETL pipeline defined in `spotify_dag.py` will be automatically scheduled to run. The data will be fetched from Spotify, validated, and loaded into the SQLite database.
+
+## Project Structure
+Here is the updated Project Structure based on your final clarification that the Dockerfile is located in the airflow/ directory:
+```
+ETL-3-Spotify/
+│
+├── mysong_playlist/           # Folder for Spotify API-related scripts and dependencies
+│   ├── app.py                 # Python script for Spotify API authentication (handles tokens)
+│   ├── main.py                # Python script to initialize and load environment variables
+│   ├── .env                   # Environment variables for Spotify credentials (SPOTIFY_CLIENT_ID, SPOTIFY_SECRET, etc.)
+│   └── requirements.txt       # Python dependencies for the Spotify API and other project needs
+│
+├── airflow/                   # Folder containing Airflow-related configuration, DAGs, and Docker setup
+│   ├── dags/                  # DAGs folder where Airflow looks for the DAG files and ETL scripts
+│   │   ├── spotify_etl.py     # Python script to handle the ETL process (extracting, transforming, and loading data)
+│   │   ├── spotify_dag.py     # Python script defining the Airflow DAG to schedule the ETL
+│   │   ├── .env               # Environment variables required by Airflow (SPOTIFY credentials, DB location)
+│   │
+│   ├── .astro/                # Folder containing Astro-specific configuration files
+│   │   └── config.yaml        # Astro's configuration file for Airflow setup
+│   ├── Dockerfile             # Dockerfile to set up the Airflow environment inside Astro
+│   ├── airflow_settings.yaml  # Airflow-specific configuration settings
+│   └── airflow-venv/          # Virtual environment specifically for Airflow
+│
+├── .venv/                     # Virtual environment for the main project (mysong_playlist)
+├── README.md                  # Documentation for the project
+```
+
+### Breakdown of Key Components:
+1. `mysong_playlist/`: Contains all scripts and dependencies related to interacting with the Spotify API:
+    * `app.py`: Handles authentication and token management for the Spotify API. 
+    * `main.py`: Initializes the environment by loading variables from the .env file and setting up the connection to the Spotify API.
+    * `.env`: Stores the environment variables, such as SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_TOKEN, and SPOTIFY_REFRESH_TOKEN.
+    * `requirements.txt`: Lists all the Python dependencies needed to work with the Spotify API and handle other project-specific requirements.
+
+2. `airflow/`: Contains all the files necessary for Airflow and Astro to orchestrate the ETL pipeline:
+    * `dags/`: This directory is where the Airflow DAG and ETL scripts are stored:
+        * `spotify_etl.py`: Contains the logic to extract Spotify data, validate it, and load it into the SQLite database.
+        * `spotify_dag.py`: Defines the Airflow DAG, which schedules the ETL tasks (calls spotify_etl.py).
+        * `.env`: Holds environment variables required by Airflow, such as the database location and Spotify API credentials, for execution within Airflow.
+    * `.astro/`: Contains Astro-specific configuration files that help set up and manage the Airflow environment:
+        * `config.yaml`: Configures how Astro manages the Airflow setup.
+    * `Dockerfile`: The Dockerfile used to define the environment in which Astro will run Airflow. This sets up dependencies, services, and configurations needed by Airflow.
+    * `airflow_settings.yaml`: Configuration settings for running Airflow tasks.
+    * `airflow-venv/`: A separate virtual environment dedicated to Airflow.
+
+3. `.venv/`: A virtual environment dedicated to the main project (everything in mysong_playlist/), which is separate from the virtual environment used by Airflow.
+
+### Important Notes:
+1. Dockerfile in `airflow/`: The `Dockerfile` in the `airflow/` directory defines how Astro sets up the Airflow environment. This ensures that all necessary dependencies (like Flask, Pandas, etc.) are installed in the Docker container.
+
+2. Multiple `.env` Files:
+    * The `.env` file in `mysong_playlist/` is used for managing environment variables related to Spotify API interactions (e.g., client IDs, tokens).
+    * The `.env` file in `airflow/dags/` is used by Airflow to ensure that the DAG can execute using the necessary credentials and database locations during ETL processing.
+
 
