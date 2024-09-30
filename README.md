@@ -125,10 +125,12 @@ astro dev start
 ### Running the ETL Pipeline
 Once Airflow is running, the ETL pipeline defined in `spotify_dag.py` will be automatically scheduled to run. The data will be fetched from Spotify, validated, and loaded into the SQLite database.
 After completing all the previous steps, trigger the DAG. If the DAG runs successfully, the Airflow UI will display the following:
+
 ![dags-airflow](documentations/dags-airflow.png)
 
 ### Expected SQLite Table Structure
 When you load your Spotify data into SQLite, your table might look something like this:
+
 ![sqlite-db](documentations/sqlite-db.png)
 
 ## Project Structure
