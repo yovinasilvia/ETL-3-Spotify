@@ -87,20 +87,26 @@ After setting up Spotify APIa and Astro CLI, I initialized Airflow using Astro f
 astro dev init
 ```
 This will generate the necessary project structure for Airflow within Astro.
+
 2. Create a directory for Airflow configuration:
+
 In my project, I created an airflow directory where all Airflow-related settings are stored.
 
 3. Creating `spotify_etl.py`
+
 Create the [spotify_etl.py](airflow/dags/spotify_etl.py) file inside the `dags` directory within the `airflow` folder. This file contains the logic to extract data from Spotify, validate it, and load it into the SQLite database.
 
 4. Creating `spotify_dag.py`
+
 Next, create the [spotify_dag.py](airflow/dags/spotify_dag.py) file in the same dags directory. This file will contain the DAG definition to schedule the ETL process using Airflow.
 
 5. Ensure Both Files are in the dags Directory
+
 Make sure both `spotify_etl.py` and `spotify_dag.py` are inside the `dags` directory within the `airflow` folder. This is important because Airflow looks for DAG definitions in the `dags` folder.
 
 ### Setting Up Airflow
 1. Create a Virtual Environment for Airflow:
+
 In the `airflow` directory, I set up a separate virtual environment for running Airflow tasks:
 ```
 cd airflow
@@ -108,9 +114,11 @@ python -m venv airflow-venv
 source airflow-venv\Scripts\activate # On Mac: airflow-venv/bin/activate 
 ```
 2. Docker Configuration:
+
 I configured the [Dockerfile](airflow/Dockerfile) and [config.yaml](airflow/.astro/config.yaml) (these were provided in the project) to ensure that Airflow is set up correctly to run the DAG.
 
 3. Astro Airflow Start:
+
 Once the configuration was complete, I started the Airflow instance through Astro using the command:
 ```
 astro dev start
