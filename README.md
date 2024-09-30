@@ -109,7 +109,7 @@ Next, create the [spotify_dag.py](airflow/dags/spotify_dag.py) file in the same 
 Make sure both `spotify_etl.py` and `spotify_dag.py` are inside the `dags` directory within the `airflow` folder. This is important because Airflow looks for DAG definitions in the `dags` folder.
 
 ### Setting Up Airflow
-Create a Virtual Environment for Airflow:
+* Create a Virtual Environment for Airflow:
 
 In the `airflow` directory, I set up a separate virtual environment for running Airflow tasks:
 ```
@@ -117,11 +117,11 @@ cd airflow
 python -m venv airflow-venv
 source airflow-venv\Scripts\activate # On Mac: airflow-venv/bin/activate 
 ```
-Docker Configuration:
+* Docker Configuration:
 
 I configured the [Dockerfile](airflow/Dockerfile) and [config.yaml](airflow/.astro/config.yaml) (these were provided in the project) to ensure that Airflow is set up correctly to run the DAG.
 
-Astro Airflow Start:
+* Astro Airflow Start:
 
 Once the configuration was complete, I started the Airflow instance through Astro using the command:
 ```
