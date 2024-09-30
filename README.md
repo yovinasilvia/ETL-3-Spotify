@@ -124,7 +124,7 @@ astro dev start
 Once Airflow is running, the ETL pipeline defined in `spotify_dag.py` will be automatically scheduled to run. The data will be fetched from Spotify, validated, and loaded into the SQLite database.
 
 ## Project Structure
-Here is the updated Project Structure based on your final clarification that the Dockerfile is located in the airflow/ directory:
+Here is the updated Project Structure based on your final clarification that the `Dockerfile` is located in the `airflow/` directory:
 ```
 ETL-3-Spotify/
 │
