@@ -12,6 +12,10 @@ This project demonstrates an ETL (Extract, Transform, Load) pipeline that retrie
 * `.env`: Stores environment variables such as Spotify API credentials and database configurations.
 
 ## Getting Started
+### Clone This Repository
+```
+git clone https://github.com/yovinasilvia/ETL-3-Spotify.git
+```
 ### Project Directory Setup
 First, I created a project directory named ETL-3-Spotify. You can name it based on your preference.
 ```
@@ -82,25 +86,25 @@ Make sure to replace the placeholders with your actual values from the steps abo
 ### Initializing Airflow with Astro
 Before you run the Astro CLI you need to [download](https://github.com/astronomer/astro-cli/releases) the installer and add the installer path to your local environment variables.
 After setting up Spotify APIa and Astro CLI, I initialized Airflow using Astro for scheduling the ETL tasks.
-1. Initialize Astro in the project:
+* Initialize Astro in the project:
 ```
 astro dev init
 ```
 This will generate the necessary project structure for Airflow within Astro.
 
-2. Create a directory for Airflow configuration:
+* Create a directory for Airflow configuration:
 
 In my project, I created an airflow directory where all Airflow-related settings are stored.
 
-3. Creating `spotify_etl.py`
+* Creating `spotify_etl.py`
 
 Create the [spotify_etl.py](airflow/dags/spotify_etl.py) file inside the `dags` directory within the `airflow` folder. This file contains the logic to extract data from Spotify, validate it, and load it into the SQLite database.
 
-4. Creating `spotify_dag.py`
+* Creating `spotify_dag.py`
 
 Next, create the [spotify_dag.py](airflow/dags/spotify_dag.py) file in the same dags directory. This file will contain the DAG definition to schedule the ETL process using Airflow.
 
-5. Ensure Both Files are in the dags Directory
+* Ensure Both Files are in the dags Directory
 
 Make sure both `spotify_etl.py` and `spotify_dag.py` are inside the `dags` directory within the `airflow` folder. This is important because Airflow looks for DAG definitions in the `dags` folder.
 
